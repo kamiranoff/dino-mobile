@@ -15,15 +15,6 @@ public class Player : MonoBehaviour
         _playerAnimation = GetComponent<Animator>();
     }
 
-    // Use this for initialization
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     private void FixedUpdate()
     {
@@ -31,12 +22,12 @@ public class Player : MonoBehaviour
     }
 
 
-    void PlayerMoveKeyboard()
+    private void PlayerMoveKeyboard()
     {
-        float forceX = 0f;
-        float velocity = Math.Abs(_playerBody.velocity.x);
-
-        float xAxis = Input.GetAxisRaw("Horizontal");
+        var forceX = 0f;
+        var velocity = Math.Abs(_playerBody.velocity.x);
+        var xAxis = Input.GetAxisRaw("Horizontal");
+        var scale = transform.localScale;
 
 
         // Going right
@@ -44,6 +35,8 @@ public class Player : MonoBehaviour
         {
             if (velocity < MaxVelocity)
             {
+                scale.x = 1f;
+                transform.localScale = scale;
                 forceX = Speed;
                 _playerAnimation.SetBool("Walk", true);
             }
@@ -52,6 +45,8 @@ public class Player : MonoBehaviour
         {
             if (velocity < MaxVelocity)
             {
+                scale.x = -1f;
+                transform.localScale = scale;
                 forceX = -Speed;
                 _playerAnimation.SetBool("Walk", true);
             }
